@@ -1,17 +1,17 @@
-# cfcuk-form-components
+# nashsaint-form-components
 
-Extracted Vue 3 form components ready to reuse across projects. Components expect a `form` object with field values and an `errors` bag (compatible with Inertia's `useForm` shape but works with any reactive object).
+Vue 3 form components ready to reuse across projects. Components expect a `form` object with field values and an `errors` bag (compatible with Inertia's `useForm` shape but works with any reactive object).
 
 ## Components
 CAmount, CCheckbox, CConsent, CDatePicker, CDateRangePicker, CDropdown, CFile, CInput, CNumber, CTagInput, CTextarea, CTypeAhead, CWysiwyg, CYesOrNo
 
 ## Using in another project
-1. Add this repo as a dependency (after you push it somewhere): `npm install git+ssh://<your-repo-url>.git` or locally during development: `npm install ../cfcuknational/form-components`.
+1. Add this repo as a dependency (after you push it somewhere): `npm install git+ssh://<your-repo-url>.git` or locally during development: `npm install ../form-components`.
 2. Ensure peer/dependencies are installed in the host app: `vue@^3.4`, `@vuepic/vue-datepicker@^11`, `date-fns@^4`, `lucide-vue-next@^0.542`, `@tiptap/vue-3@^3.3`, `@tiptap/starter-kit@^3.3`.
 3. Register globally or import ad-hoc:
    ```js
    import { createApp } from 'vue'
-   import { FormComponentsPlugin, CInput } from 'cfcuk-form-components'
+   import { FormComponentsPlugin, CInput } from 'nashsaint-form-components'
 
    const app = createApp(App)
    app.use(FormComponentsPlugin) // registers all components with their C* names
