@@ -3,7 +3,7 @@
 Vue 3 form components that share a common contract: each component reads/writes from a `form` object and shows validation messages from `form.errors`. All names are exported and can be registered globally via the plugin.
 
 ## Install & register
-1. Install from git/path: `npm install git+ssh://<your-repo-url>.git` or `npm install ../form-components`.
+1. Install from git/path: `npm install nashsaint-form-components`.
 2. Ensure host app dependencies exist: `vue@^3.4`, `@vuepic/vue-datepicker@^11`, `date-fns@^4`, `lucide-vue-next@^0.542`, `@tiptap/vue-3@^3.3`, `@tiptap/starter-kit@^3.3`.
 3. Register globally or import ad-hoc:
    ```js
