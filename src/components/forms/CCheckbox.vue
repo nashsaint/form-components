@@ -9,7 +9,8 @@
         :disabled="disabled"
         :required="required"
         :class="[
-          'h-5 w-5 rounded-full border-2 border-gray-300 bg-white text-indigo-600',
+          'h-5 w-5 border-2 border-gray-300 bg-white text-indigo-600',
+          rectangular ? 'rounded-none' : 'rounded-full',
           'transition duration-150 ease-out',
           'focus:outline-none focus:ring-0 focus:ring-offset-0',
           'checked:bg-indigo-600 checked:border-indigo-600 checked:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]',
@@ -61,6 +62,10 @@ const props = defineProps({
   inputClass: {
     type: [String, Array, Object],
     default: ''
+  },
+  rectangular: {
+    type: Boolean,
+    default: false
   }
 })
 

@@ -6,8 +6,9 @@
 
     <!-- Dropzone -->
     <div
-      class="relative rounded-lg border-2 border-dashed p-4 text-center transition-colors"
+      class="relative border-2 border-dashed p-4 text-center transition-colors"
       :class="[
+        rectangular ? 'rounded-none' : 'rounded-lg',
         dragging ? 'border-blue-400 bg-blue-50' : 'border-gray-300 bg-white',
         hasError ? 'border-red-500' : ''
       ]"
@@ -60,21 +61,26 @@
     >
       <div
         v-if="it.isImage"
-        :class="props.multiple
-          ? 'aspect-video w-full overflow-hidden rounded border bg-white'
-          : 'w-full overflow-hidden rounded border bg-white'"
+        :class="[
+          props.multiple
+            ? 'aspect-video w-full overflow-hidden border bg-white'
+            : 'w-full overflow-hidden border bg-white',
+          rectangular ? 'rounded-none' : 'rounded'
+        ]"
       >
         <img :src="it.url" alt="" class="h-full w-full object-cover" />
       </div>
       <div
         v-else
-        class="w-full rounded border p-3 text-xs bg-gray-50"
+        class="w-full border p-3 text-xs bg-gray-50"
+        :class="rectangular ? 'rounded-none' : 'rounded'"
       >
         <p class="font-medium truncate" :title="it.name">{{ it.name }}</p>
         <p class="text-gray-500 truncate">{{ it.ext?.toUpperCase() }}</p>
       </div>
       <span
-        class="absolute left-1 top-1 text-[10px] bg-white/90 border px-1 rounded"
+        class="absolute left-1 top-1 text-[10px] bg-white/90 border px-1"
+        :class="rectangular ? 'rounded-none' : 'rounded'"
       >Existing</span>
     </div>
 
@@ -87,13 +93,16 @@
     >
       <div
         v-if="it.isImage"
-        :class="props.multiple
-          ? 'aspect-video w-full overflow-hidden rounded border'
-          : 'w-full overflow-hidden rounded border'"
+        :class="[
+          props.multiple
+            ? 'aspect-video w-full overflow-hidden border'
+            : 'w-full overflow-hidden border',
+          rectangular ? 'rounded-none' : 'rounded'
+        ]"
       >
         <img :src="it.previewUrl" alt="" class="h-full w-full object-cover" />
       </div>
-      <div v-else class="w-full rounded border p-3 text-xs bg-gray-50">
+      <div v-else class="w-full border p-3 text-xs bg-gray-50" :class="rectangular ? 'rounded-none' : 'rounded'">
         <p class="font-medium truncate" :title="it.file.name">{{ it.file.name }}</p>
         <p class="text-gray-500 truncate">{{ prettySize(it.file.size) }}</p>
       </div>
@@ -101,7 +110,8 @@
       <button
         v-if="props.multiple"
         type="button"
-        class="absolute -top-2 -right-2 hidden group-hover:block bg-white border rounded-full p-1 shadow"
+        class="absolute -top-2 -right-2 hidden group-hover:block bg-white border p-1 shadow"
+        :class="rectangular ? 'rounded-none' : 'rounded-full'"
         @click.stop="removeAt(idx)"
         aria-label="Remove file"
         title="Remove"
@@ -132,7 +142,8 @@ const props = defineProps({
   multiple: { type: Boolean, default: false },
   accept: { type: [String, Array], default: '' }, // e.g. 'image/*,.pdf' or ['image/*','.pdf']
   class: { type: [String, Array, Object], default: '' },
-  initial: { type: Array, default: () => [] }
+  initial: { type: Array, default: () => [] },
+  rectangular: { type: Boolean, default: false }
 })
 
 const fileInput = ref(null)

@@ -4,7 +4,10 @@
       {{ label || fieldLabel }}
     </label>
 
-    <div class="flex w-full overflow-hidden rounded-md border border-gray-300 shadow-sm">
+    <div
+      class="flex w-full overflow-hidden border border-gray-300 shadow-sm"
+      :class="rectangular ? 'rounded-none' : 'rounded-md'"
+    >
       <button
         type="button"
         class="flex-1 px-4 py-2 text-sm focus:outline-none"
@@ -49,6 +52,10 @@ defineProps({
   form: {
     type: Object,
     required: true
+  },
+  rectangular: {
+    type: Boolean,
+    default: false
   }
 })
 

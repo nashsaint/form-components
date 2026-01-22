@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group">
+  <div class="form-group" :style="rectangular ? '--form-radius: 0px' : ''">
     <label :for="field" class="block text-[10px] text-gray-700 mb-1">
       {{ label || fieldLabel }}
       <span v-if="required" class="text-red-600 text-[8px]">(required)</span>
@@ -11,8 +11,11 @@
         :required="required"
         :disabled="disabled"
         v-model="model"
-        class="w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring focus:ring-opacity-50 text-xs text-gray-700 pr-8 appearance-none"
-        :class="error ? 'border-red-500' : 'border-gray-300'"
+        class="w-full border px-3 py-2 focus:outline-none focus:ring focus:ring-opacity-50 text-xs text-gray-700 pr-8 appearance-none"
+        :class="[
+          rectangular ? 'rounded-none' : 'rounded-xl',
+          error ? 'border-red-500' : 'border-gray-300'
+        ]"
         :aria-invalid="!!error"
         :aria-describedby="error ? `${field}-error` : undefined"
       >
@@ -68,7 +71,8 @@ const props = defineProps({
   valueKey: { type: String, default: 'id' },
   textKey: { type: String, default: 'name' },
   number: { type: Boolean, default: false },
-  form: { type: Object, default: null }
+  form: { type: Object, default: null },
+  rectangular: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -107,7 +111,7 @@ select {
   font-size: 1rem;
   line-height: 1.5rem;
 
-  border-radius: 0.75rem; /* rounded-xl */
+  border-radius: var(--form-radius, 0.75rem); /* rounded-xl */
   height: 46px; /* visually identical to DatePicker’s border height */
   box-sizing: border-box;
 }

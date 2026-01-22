@@ -7,7 +7,8 @@
         v-model="form[field]"
         :disabled="disabled"
         :required="required"
-        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring focus:ring-opacity-50"
+        class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring focus:ring-opacity-50"
+        :class="rectangular ? 'rounded-none' : 'rounded'"
         :aria-invalid="!!form?.errors?.[field]"
         :aria-describedby="form?.errors?.[field] ? `${field}-error` : undefined"
       />
@@ -60,6 +61,10 @@ const props = defineProps({
     default: false
   },
   defaultValue: {
+    type: Boolean,
+    default: false
+  },
+  rectangular: {
     type: Boolean,
     default: false
   }

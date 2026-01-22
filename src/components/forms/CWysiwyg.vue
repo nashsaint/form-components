@@ -4,12 +4,15 @@
       {{ label || fieldLabel }}
     </label>
 
-    <div class="border border-gray-300 rounded-md">
+    <div class="border border-gray-300" :class="rectangular ? 'rounded-none' : 'rounded-md'">
       <div class="flex gap-2 p-2 border-b border-b-gray-200 text-sm">
         <button
           type="button"
-          class="p-1 rounded hover:bg-gray-200"
-          :class="{ 'text-blue-600': editor.isActive('bold') }"
+          class="p-1 hover:bg-gray-200"
+          :class="[
+            rectangular ? 'rounded-none' : 'rounded',
+            { 'text-blue-600': editor.isActive('bold') }
+          ]"
           @click="editor.chain().focus().toggleBold().run()"
         >
           <Bold class="w-4"/>
@@ -17,8 +20,11 @@
 
         <button
           type="button"
-          class="p-1 rounded hover:bg-gray-200"
-          :class="{ 'text-blue-600': editor.isActive('italic') }"
+          class="p-1 hover:bg-gray-200"
+          :class="[
+            rectangular ? 'rounded-none' : 'rounded',
+            { 'text-blue-600': editor.isActive('italic') }
+          ]"
           @click="editor.chain().focus().toggleItalic().run()"
         >
           <Italic class="w-4" />
@@ -26,8 +32,11 @@
 
         <button
           type="button"
-          class="p-1 rounded hover:bg-gray-200"
-          :class="{ 'text-blue-600': editor.isActive('bulletList') }"
+          class="p-1 hover:bg-gray-200"
+          :class="[
+            rectangular ? 'rounded-none' : 'rounded',
+            { 'text-blue-600': editor.isActive('bulletList') }
+          ]"
           @click="editor.chain().focus().toggleBulletList().run()"
         >
           <List class="w-5 h-5" />
@@ -35,8 +44,11 @@
 
         <button
           type="button"
-          class="p-1 rounded hover:bg-gray-200"
-          :class="{ 'text-blue-600': editor.isActive('orderedList') }"
+          class="p-1 hover:bg-gray-200"
+          :class="[
+            rectangular ? 'rounded-none' : 'rounded',
+            { 'text-blue-600': editor.isActive('orderedList') }
+          ]"
           @click="editor.chain().focus().toggleOrderedList().run()"
         >
           <ListOrdered class="w-5 h-5" />
@@ -70,7 +82,8 @@ const props = defineProps({
   required: Boolean,
   disabled: Boolean,
   placeholder: { type: String, default: '' },
-  class: { type: [String, Array, Object], default: '' }
+  class: { type: [String, Array, Object], default: '' },
+  rectangular: { type: Boolean, default: false }
 })
 
 const customClass = props.class

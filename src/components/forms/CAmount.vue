@@ -17,8 +17,11 @@
         :placeholder="placeholder"
         v-model="inputValue"
         @blur="onBlur"
-        class="pl-8 pr-3 py-3 text-sm block w-full rounded-xl border border-gray-400 focus:outline-none focus:ring focus:ring-opacity-50"
-        :class="form?.errors?.[field] ? 'border-red-500' : 'border-gray-400'"
+        class="pl-8 pr-3 py-3 text-sm block w-full border border-gray-400 focus:outline-none focus:ring focus:ring-opacity-50"
+        :class="[
+          rectangular ? 'rounded-none' : 'rounded-xl',
+          form?.errors?.[field] ? 'border-red-500' : 'border-gray-400'
+        ]"
         :aria-invalid="!!form?.errors?.[field]"
         :aria-describedby="form?.errors?.[field] ? `${field}-error` : undefined"
       />
@@ -57,6 +60,10 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: '0.00'
+  },
+  rectangular: {
+    type: Boolean,
+    default: false
   }
 })
 

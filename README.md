@@ -26,3 +26,19 @@ CAmount, CCheckbox, CConsent, CDatePicker, CDateRangePicker, CDropdown, CFile, C
 ## Notes
 - The components are source-first (no build step); Vite will compile the `.vue` files when the package is installed from git/path. If a bundler tries to prebundle with esbuild, add the package to `optimizeDeps.exclude`.
 - Feel free to add stories/tests here if you want a tighter contract before publishing to a registry.
+
+## Rectangular option
+All form components accept a `rectangular` boolean to remove border radii.
+
+```vue
+<template>
+  <CInput field="company_name" label="Company name" :form="form" rectangular />
+  <CDateRangePicker
+    :form="form"
+    start-field="start_date"
+    end-field="end_date"
+    rectangular
+  />
+  <CFile :form="form" field="attachments" label="Attachments" multiple rectangular />
+</template>
+```

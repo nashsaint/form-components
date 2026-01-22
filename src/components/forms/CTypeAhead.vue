@@ -6,8 +6,11 @@
 
     <div class="relative">
       <div
-        class="flex items-center gap-2 rounded-xl border bg-white border"
-        :class="hasError ? 'border-red-500' : 'border-[#aeaeae]'"
+        class="flex items-center gap-2 border bg-white border"
+        :class="[
+          rectangular ? 'rounded-none' : 'rounded-xl',
+          hasError ? 'border-red-500' : 'border-[#aeaeae]'
+        ]"
         role="combobox"
         :aria-expanded="open ? 'true' : 'false'"
         :aria-owns="listboxId"
@@ -41,7 +44,8 @@
       <!-- Panel -->
       <div
         v-show="open"
-        class="absolute z-10 mt-1 w-full rounded-xlborder border-gray-400 bg-white shadow-lg"
+        class="absolute z-10 mt-1 w-full border border-gray-400 bg-white shadow-lg"
+        :class="rectangular ? 'rounded-none' : 'rounded-xl'"
         @mousedown.prevent
       >
         <div v-if="loading" class="p-3 text-sm text-gray-500">Searching…</div>
@@ -95,7 +99,8 @@ const props = defineProps({
   debounceMs: { type: Number, default: 200 },
   disabled: { type: Boolean, default: false },
   clearable: { type: Boolean, default: true },
-  emptyText: { type: String, default: 'No results' }
+  emptyText: { type: String, default: 'No results' },
+  rectangular: { type: Boolean, default: false }
 })
 
 const inputEl = ref(null)

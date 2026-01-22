@@ -10,7 +10,8 @@
       :placeholder="placeholder || label || fieldLabel"
       :required="required"
       :disabled="disabled"
-      class="w-full !px-4 py-3 rounded-xl text-gray-800 border border-gray-400 focus:border-indigo-500 focus:ring focus:ring-indigo-400 outline-none text-sm"
+      class="w-full !px-4 py-3 text-gray-800 border border-gray-400 focus:border-indigo-500 focus:ring focus:ring-indigo-400 outline-none text-sm"
+      :class="rectangular ? 'rounded-none' : 'rounded-xl'"
       :value="form?.[field]"
       @input="e => form[field] = e.target.value"
       :aria-invalid="!!form?.errors?.[field]"
@@ -46,6 +47,10 @@ defineProps({
     default: false
   },
   disabled: {
+    type: Boolean,
+    default: false
+  },
+  rectangular: {
     type: Boolean,
     default: false
   },

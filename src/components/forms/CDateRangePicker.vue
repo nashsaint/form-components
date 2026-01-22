@@ -16,7 +16,9 @@
       :format="displayFormat"
       :clearable="true"
       class="w-full"
-      input-class="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring focus:ring-opacity-50"
+      :input-class="rectangular
+        ? 'w-full rounded-none border px-3 py-2 focus:outline-none focus:ring focus:ring-opacity-50'
+        : 'w-full rounded-md border px-3 py-2 focus:outline-none focus:ring focus:ring-opacity-50'"
       :class="[ hasError ? 'border-red-500' : 'border-gray-300' ]"
       :aria-invalid="hasError ? 'true' : 'false'"
       :aria-describedby="hasError ? `${startField}-error ${endField}-error` : undefined"
@@ -27,7 +29,8 @@
         v-for="p in computedPresets"
         :key="p.label"
         type="button"
-        class="text-xs px-2 py-1 rounded border bg-white hover:bg-gray-50"
+        class="text-xs px-2 py-1 border bg-white hover:bg-gray-50"
+        :class="rectangular ? 'rounded-none' : 'rounded'"
         @click="applyPreset(p.getRange())"
       >
         {{ p.label }}
@@ -57,7 +60,8 @@ const props = defineProps({
   maxDate: { type: [Date, String], default: null },
   displayFormat: { type: String, default: 'dd-MM-yyyy' },
   showPresets: { type: Boolean, default: true },
-  presets: { type: Array, default: () => [] }
+  presets: { type: Array, default: () => [] },
+  rectangular: { type: Boolean, default: false }
 })
 
 const toLabel = key => key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())

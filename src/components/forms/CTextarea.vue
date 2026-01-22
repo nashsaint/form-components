@@ -13,8 +13,11 @@
       :maxlength="maxlength"
       v-model="inputValue"
       @input="updateValue"
-      class="w-full px-3 py-2 h-60 text-gray-700 text-sm rounded-xl border border-gray-300 focus:outline-none focus:ring focus:ring-opacity-50 resize-none"
-      :class="form?.errors?.[field] ? 'border-red-500' : 'border-gray-300'"
+      class="w-full px-3 py-2 h-60 text-gray-700 text-sm border border-gray-300 focus:outline-none focus:ring focus:ring-opacity-50 resize-none"
+      :class="[
+        rectangular ? 'rounded-none' : 'rounded-xl',
+        form?.errors?.[field] ? 'border-red-500' : 'border-gray-300'
+      ]"
       :aria-invalid="!!form?.errors?.[field]"
       :aria-describedby="form?.errors?.[field] ? `${field}-error` : undefined"
     ></textarea>
@@ -49,6 +52,10 @@ const props = defineProps({
   maxlength: {
     type: Number,
     default: 500
+  },
+  rectangular: {
+    type: Boolean,
+    default: false
   }
 })
 
